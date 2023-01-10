@@ -9,7 +9,8 @@ contenedorProducto.addEventListener("click", (e) => {
 })
 
 //Agregar productos al carrito o aumentar su cantidad
-const validarRepetido = (id) => {
+const validarRepetido = async (id) => {
+    productos = await llamarStock()
     const repetido = carrito.find(prod => prod.id == id);
 
     if(!repetido){
@@ -18,6 +19,15 @@ const validarRepetido = (id) => {
         contadorCarrito.innerText = carrito.length;
         actualizarTotal();
         guardarCarritoStorage(carrito);
+        Toastify({
+            text: `Se agregó ${producto.name} al carrito`,
+            duration: 2500,
+            position: "left",
+            gravity: "bottom",
+            style: {
+                background: "linear-gradient(to right, rgb(0, 57, 143), rgb(13, 0, 61))",
+            },
+        }).showToast();
     }else{
         repetido.cantidad++
         actualizarTotal();
@@ -29,6 +39,7 @@ const contadorCarrito = document.getElementById("contaCarrito");
 contadorCarrito.innerText = carrito.length;
 const total = document.getElementById("totalPaga");
 const botonFinalizar = document.getElementById("btnFCompra");
+const botonVaciar = document.getElementById("vaciarCarrito")
 
 //Al apretar el boton para eliminar
 contCarrito.addEventListener("click" , (e) => {
@@ -122,5 +133,36 @@ botonFinalizar.addEventListener("click" , () => {
         contadorCarrito.innerText = carrito.length;
         localStorage.clear();
     }
+})
+
+//Vaciar carrito
+botonVaciar.addEventListener("click", () => {
+    if(carrito.length === 0){
+        Toastify({
+            text: "El carrito está vacio",
+            duration: 2500,
+            position: "left",
+            gravity: "top",
+            style: {
+                background: "linear-gradient(to right, rgb(0, 57, 143), rgb(13, 0, 61))",
+            },
+        }).showToast();
+    }else{
+        carrito = []
+        actualizarCarrito();
+        actualizarTotal();
+        contadorCarrito.innerText = carrito.length;
+        localStorage.clear();
+        Toastify({
+            text: "Se vació el carrito",
+            duration: 2500,
+            position: "left",
+            gravity: "top",
+            style: {
+                background: "linear-gradient(to right, rgb(0, 57, 143), rgb(13, 0, 61))",
+            },
+        }).showToast();
+    }
+    
 })
 

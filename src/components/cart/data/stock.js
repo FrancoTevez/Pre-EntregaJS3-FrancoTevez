@@ -1,4 +1,4 @@
-const productos = [
+/*const productos = [
     {name:"Botas Nike Air More Uptempo 96", cantidad: 1, precio: 65999, marca:"Nike", tipo:"Zapatilla", img:"./public/img/calsadobotasair.webp", id:1},
     {name:"Zapatillas Nike Air-Max 97", cantidad: 1, precio: 65999, marca:"Nike", tipo:"Zapatilla", img:"./public/img/nikeairmax.webp", id:2},
     {name:"Botas Jordan Air Retro 7", cantidad: 1, precio: 77999, marca:"Jordan", tipo:"Zapatilla", img:"./public/img/botasnike.webp", id:3},
@@ -14,5 +14,5 @@ const productos = [
     {name:"Remera Jordan Essential", cantidad: 1, precio: 9799, marca:"Jordan", tipo:"Remera", img:"./public/img/remerajordanessential.webp", id:13},
     {name:"Pantalón Puma Power", cantidad: 1, precio: 14279, marca:"Puma", tipo:"Pantalón", img:"./public/img/pantalonpumapower.webp", id:14},
     {name:"Zapatillas Puma TRC Blaze", cantidad: 1, precio: 27999, marca:"Puma", tipo:"Zapatilla", img:"./public/img/pumablaze.webp", id:15}
-];
+];*/
 
