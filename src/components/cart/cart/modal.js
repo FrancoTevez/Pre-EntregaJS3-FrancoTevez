@@ -5,10 +5,10 @@ const cruzCarrito = document.getElementById("cerrarCarrito")
 
 //Al abrir el modal
 carritoIcono.addEventListener("click" , () => {
-    modal.style.display = "block"
+    sideBar.style.transform = "translateY(0px)"
+    modal.style.visibility = "visible"
     cruzCarrito.style.opacity = "1"
     cruzCarrito.style.display = "block"
-    sideBar.style.width = "500px"
     actualizarTotal()
     contCarrito.innerHTML= ""
 
@@ -34,8 +34,8 @@ carritoIcono.addEventListener("click" , () => {
 
 //Al cerrar el modal
 cruzCarrito.addEventListener("click" , () => {
-    modal.style.display = "none"
+    sideBar.style.transform = "translateY(900px)"
+    modal.style.visibility = "hidden"
     cruzCarrito.style.opacity = "0"
     cruzCarrito.style.display = "none"
-    sideBar.style.width = "0px"
 })

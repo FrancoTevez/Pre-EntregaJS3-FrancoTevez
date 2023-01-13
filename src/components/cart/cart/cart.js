@@ -127,6 +127,9 @@ botonFinalizar.addEventListener("click" , () => {
             background: "linear-gradient(to right, rgb(0, 57, 143), rgb(13, 0, 61))",
         },
         }).showToast();
+        const elementoHistorial = {precioTotal: `${carrito.reduce((acc,prod) => acc + (prod.cantidad * prod.precio),0)}`, tiempo: new Date().toLocaleString(), cantidad: `${carrito.reduce((acc,prod) => acc + prod.cantidad,0)}`}
+        historial.push(elementoHistorial)
+        actualizarHistorial()
         carrito = [];
         actualizarCarrito();
         actualizarTotal();

@@ -2,7 +2,7 @@ const llamarStock = async () => {
     try{
         const resp = await fetch("/src/stock.json")
         const data = await resp.json()
-
+        
         return data
     }catch (error){
         Toastify({
