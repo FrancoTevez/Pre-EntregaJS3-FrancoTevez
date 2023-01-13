@@ -1,7 +1,7 @@
 const llamarStock = async () => {
     try{
-        const resp = await fetch("/src/stock.json")
-        const data = await resp.json()
+        const resp = await fetch("/src/stock.json");
+        const data = await resp.json();
         
         return data
     }catch (error){
@@ -14,5 +14,5 @@ const llamarStock = async () => {
                 background: "linear-gradient(to right, rgb(167, 11, 0), rgb(61, 0, 13))",
             },
         }).showToast();
-    }
-}
+    };
+};

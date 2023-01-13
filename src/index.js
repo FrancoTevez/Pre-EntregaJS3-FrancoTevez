@@ -5,5 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
         carrito = obtenerCarritoStorage();
         actualizarCarrito(carrito);
         contadorCarrito.innerText = carrito.length;
-    }
-})
+    };
+    if (localStorage.getItem('historial')) {
+        historial = obtenerHistorialStorage();
+        actualizarHistorial(historial);
+    };
+});

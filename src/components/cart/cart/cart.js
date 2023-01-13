@@ -2,15 +2,13 @@ let carrito = [];
 
 const contenedorProducto = document.getElementById("contenedorArt");
 
-contenedorProducto.addEventListener("click", (e) => {
-    if(e.target.id >= 1){
-        validarRepetido(e.target.id);
-    } 
+contenedorProducto.addEventListener("click", (e) => {  
+    e.target.id >= 1 && validarRepetido(e.target.id);
 })
 
 //Agregar productos al carrito o aumentar su cantidad
 const validarRepetido = async (id) => {
-    productos = await llamarStock()
+    productos = await llamarStock();
     const repetido = carrito.find(prod => prod.id == id);
 
     if(!repetido){
@@ -32,28 +30,26 @@ const validarRepetido = async (id) => {
         repetido.cantidad++
         actualizarTotal();
     }
-}
+};
 
 const contCarrito = document.getElementById("elementosCarrito");
 const contadorCarrito = document.getElementById("contaCarrito");
 contadorCarrito.innerText = carrito.length;
 const total = document.getElementById("totalPaga");
 const botonFinalizar = document.getElementById("btnFCompra");
-const botonVaciar = document.getElementById("vaciarCarrito")
+const botonVaciar = document.getElementById("vaciarCarrito");
 
 //Al apretar el boton para eliminar
 contCarrito.addEventListener("click" , (e) => {
-    if (e.target.value >= 1){
-        eliminarProducto(e.target.value)
-    }
-})
+    e.target.value >= 1 && eliminarProducto(e.target.value);
+});
 
 //Eliminar un producto del carrito
 const eliminarProducto = (value) => {
     const productoAEliminar = carrito.find(producto => producto.id == value);
 
     if(productoAEliminar.cantidad > 1){
-        productoAEliminar.cantidad = productoAEliminar.cantidad - 1;
+        productoAEliminar.cantidad--;
         actualizarCarrito();
         actualizarTotal();
         guardarCarritoStorage(carrito);
@@ -65,36 +61,37 @@ const eliminarProducto = (value) => {
         contadorCarrito.innerText = carrito.length;
         guardarCarritoStorage(carrito);
     } 
-}
+};
 
 //Actualizar el carrito cuando se elimina un producto
 const actualizarCarrito = () => {
     contCarrito.innerHTML = "";
     carrito.forEach(producto => {
+        const {name, img, precio, cantidad, id} = producto;
         const div = document.createElement("div");
         div.innerHTML = `
             <div class="flexRow contArticulosCarrito">
-                <img src="${producto.img}" class="imgCarrito"">
+                <img src="${img}" class="imgCarrito"">
                 <div class="flexRowBetweenCarrito">
                     <div class="contInfoCarrito">
-                    <p class="textoCarrito">${producto.name}</p>
-                    <p class="textoCarrito"> $ ${producto.precio}</p>
-                    <p class="textoCarrito">Cantidad: ${producto.cantidad}</p> 
+                    <p class="textoCarrito">${name}</p>
+                    <p class="textoCarrito"> $ ${precio}</p>
+                    <p class="textoCarrito">Cantidad: ${cantidad}</p> 
                 </div>
                     <div class="flexRight">
-                    <button class="botonX" value="${producto.id}">X</button>
+                    <button class="botonX" value="${id}">X</button>
                 </div>
             </div>
         `
         contCarrito.appendChild(div);
-    })
-}
+    });
+};
 
 //Valor del total juntando todos los productos
 const actualizarTotal = () => {
     const totalPrecio = carrito.reduce((acc,prod) => acc + (prod.cantidad * prod.precio),0);
-    total.innerText = `Total a pagar: $${totalPrecio}`
-}
+    total.innerText = `Total a pagar: $${totalPrecio}`;
+};
 
 const guardarCarritoStorage = (carrito) => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -134,9 +131,9 @@ botonFinalizar.addEventListener("click" , () => {
         actualizarCarrito();
         actualizarTotal();
         contadorCarrito.innerText = carrito.length;
-        localStorage.clear();
-    }
-})
+        localStorage.removeItem("carrito");
+    };
+});
 
 //Vaciar carrito
 botonVaciar.addEventListener("click", () => {
@@ -155,7 +152,7 @@ botonVaciar.addEventListener("click", () => {
         actualizarCarrito();
         actualizarTotal();
         contadorCarrito.innerText = carrito.length;
-        localStorage.clear();
+        localStorage.removeItem("carrito");
         Toastify({
             text: "Se vació el carrito",
             duration: 2500,
@@ -165,7 +162,6 @@ botonVaciar.addEventListener("click", () => {
                 background: "linear-gradient(to right, rgb(0, 57, 143), rgb(13, 0, 61))",
             },
         }).showToast();
-    }
-    
-})
+    };
+});
 
